@@ -27,6 +27,13 @@
             color:#fff;
             line-height:1;
         }
+        .wrapper{
+            width:100%;
+            overflow:hidden;
+        }
+        .wrapper.lock{
+            height:100vh;
+        }
         .sec{
             padding:140px 0 90px;
         }
@@ -34,7 +41,7 @@
             width:100%;
             max-width:1960px;
             margin:0 auto;
-            padding:0 20px;
+            padding:0 12px;
         }
         h2{
             font-weight:500;
@@ -67,6 +74,7 @@
             right:0;
             bottom:0;
             z-index:9998;
+            color:#333;
         }
         .popup-cookie.dis-none{
             display:none;
@@ -118,18 +126,18 @@
             align-items:center;
         }
         h1{
-            border:3px solid #eee;
-            padding:12px;
-            font-weight:600;
-            font-size:1.6em;
+            border:1px solid #eee;
+            padding:8px;
+            font-weight:500;
+            font-size:1em;
             text-transform:capitalize;
         }
         .btn-nav{
             position:relative;
             z-index:9997;
 
-            border:2px solid #eee;
-            padding:6px;
+            border:1px solid #eee;
+            padding:5px;
             border-radius:4px;
             cursor:pointer;
         }
@@ -150,8 +158,8 @@
             animation-iteration-count:infinite;
         }
         .btn-nav .line{
-            width:20px;
-            height:2px;
+            width:16px;
+            height:1px;
             margin-bottom:5px;
             background-color:#eee;
             text-indent:-99999px;
@@ -165,29 +173,37 @@
         .btn-nav .line:last-child{
             margin-bottom:0;
         }
-        #main-nav{
+        .main-nav-container{
             position:fixed;
             left:100%;
             right:-100%;
             top:0;
             bottom:0;
             z-index:9996;
+            padding:60px 0;
             background-color:#222;
             transition:0.3s;
-
+            
             display:flex;
-            flex-flow:column nowrap;
             justify-content:center;
-            align-items:center;
+            align-items:flex-start;
         }
-        #main-nav.active{
+        .main-nav-container.active{
             left:0;
             right:0;
         }
+        #main-nav::-webkit-scrollbar{
+            display:none;
+        }
+        #main-nav{
+            overflow-y:scroll;
+            display:flex;
+            flex-flow:column nowrap;
+            align-items:center;
+        }
         #main-nav li{
-            margin:0.8em;
+            margin:30px 0;
             border-bottom:1px solid transparent;
-            padding:12px;
             font-weight:600;
             font-size:2em;
             text-transform:uppercase;
@@ -391,11 +407,11 @@
             opacity:1;
         }
 
-        /* about */
-        .about{
+        /* about (part of projects) */
+        .about,.projects{
             background-image:linear-gradient(90deg,rgba(0,0,0,0.85),rgba(0,0,0,0.9));
         }
-        .about h2{
+        .about h2,.projects h2{
             display:none;
         }
         .about .in{
@@ -417,7 +433,7 @@
         .about-txt{
             text-align: center;
         }
-        .about-txt h3{
+        .about-txt h3,.projects h3{
             margin-bottom:1em;
             font-weight:500;
             font-size:2em;
@@ -488,20 +504,21 @@
         }
         .skills-bottom ul{
             display:grid;
-            gap:40px;
+            grid-template-columns:auto auto;
+            gap:12px;
         }
         .skills-bottom li{
             border:2px solid rgba(255,255,255,0.5);
             padding:30px;
             display:grid;
-            gap:20px;
+            gap:12px;
             text-align:center;
             box-shadow:0 0 0 #fff;
-            
+            transition:0.3s; 
         }
         .skills-bottom li:hover{
-            /* box-shadow:0 0 10px #fff; */
-            animation:skills-ani 1s ease infinite;
+            box-shadow:0 0 20px #fff;
+            /* animation:skills-ani 0.5s linear infinite; */
         }
         @keyframes skills-ani{
             0%{
@@ -523,20 +540,129 @@
             fill:#fff;
         }
 
+        /* projects */
+        .projects .in{
+            display:flex;
+            flex-flow:column nowrap;
+        }
+        .projects h3{
+            align-self:center;
+        }
+        .projects h3 span{
+            display:block;
+        }
+        .projects h3 span::after{
+            content:'';
+            display:block;
+            width:100%;
+            height:2px;
+            background-color:#fff;
+            margin:5px 0 3px;
+        }
+        .all-projects ul{
+            display:grid;
+            gap:40px;
+        }
+        .all-projects li{
+            display:grid;
+            border:1px solid rgba(255,255,255,0.5);
+        }
+        .projects-img{
+            order:2;
+            overflow:hidden;
+            position:relative;
+        }
+        .projects-img:after{
+            content:'';
+            display:block;
+            position:absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            background-color:rgba(255,255,255,0);
+            transition:0.3;
+        }
+        .projects-img:hover::after{
+            background-color:rgba(255,255,255,0.1);
+        }
+        .projects-img .img-box{
+            filter:grayscale(1);
+            transition:0.3s;
+        }
+        .projects-img:hover .img-box{
+            filter:grayscale(0.8);
+            transform:scale(1.1);
+        }
+        .projects-content{
+            padding:30px;
+            display:grid;
+            gap:16px;
+            align-content:center;
+            order:1;
+        }
+        .projects-tit{
+            font-size:2em;
+            text-transform:uppercase;
+        }
+        .projects-txt{
+            font-size:1.1em;
+            color:#999;
+            line-height:1.5em;
+        }
+        .projects-txt span:first-child{
+            font-weight:700;
+            font-size:1.2em;
+            color:#ccc;
+        }
+        .projects-btn{
+            display:flex;
+        }
+        .projects-btn>div{
+            margin-right:6px;
+            padding:10px;
+            border-radius:4px;
+            background-color:#333;
+            transition:0.3s;
+        }
+        .projects-btn>div:hover{
+            background-color:#fff;
+            color:#333;
+            box-shadow:0 0 10px rgba(255,255,255,0.5);
+        }
         
         
         
+        
+
+
+
         
         @media (min-width:560px){
-            /* header */
-            h1{
-                padding:15px;
-                font-size:2em;
-            }
-
             /* skills */
             .skills-bottom ul{
-                grid-template-columns:auto auto;
+                grid-template-columns:auto auto auto;
+            }
+        }
+
+        @media (min-width:768px){
+            /* projects */
+            .projects .container{
+                max-width:940px;
+                padding:0;
+            }
+            .all-projects ul{
+                gap:0;
+            }
+            .all-projects li{
+                grid-template-columns:1fr 1fr;
+                border:none;
+            }
+            .all-projects li:nth-child(2n) .projects-img{
+                order:1;
+            }
+            .all-projects li:nth-child(2n) .projects-content{
+                order:2;
             }
         }
 
@@ -579,6 +705,22 @@
             }
             .skills-bottom ul{
                 grid-template-columns:1fr 1fr 1fr;
+            }
+
+            /* projects */
+            .projects .container{
+                width:80%;
+                max-width:1200px;
+            }
+            .projects h3{
+                align-self:flex-start;
+            }
+            .all-projects li{
+                border:1px solid rgba(255,255,255,0.5);
+                border-bottom:none;
+            }
+            .all-projects li:last-child{
+                border-bottom:1px solid rgba(255,255,255,0.5);
             }
         }
 
@@ -669,9 +811,6 @@
             .skills .skills-right{
                 flex:1;
             }
-            .skills-bottom ul{
-                grid-template-columns:repeat(6,1fr);
-            }
             .skills-bottom li{
                 padding:16px;
             }
@@ -683,6 +822,12 @@
             .container{
                 padding:0 120px;
             }
+
+            /* skills */
+            .skills-bottom ul{
+                grid-template-columns:repeat(6,1fr);
+            }
+
         }
 
 
@@ -727,13 +872,15 @@
                             <div class="line">라인</div>
                             <div class="line">라인</div>
                         </div>
-                        <ul id="main-nav">
-                            <li data-after="home"><a href="#intro">home</a></li>
-                            <li data-after="about me"><a href="#about">about me</a></li>
-                            <li data-after="my skills"><a href="#skills">my skills</a></li>
-                            <li data-after="projects"><a href="#projects">projects</a></li>
-                            <li data-after="contact"><a href="#contact">contact</a></li>
-                        </ul>
+                        <div class="main-nav-container">
+                            <ul id="main-nav">
+                                <li data-after="home"><a href="#intro">home</a></li>
+                                <li data-after="about me"><a href="#about">about me</a></li>
+                                <li data-after="my skills"><a href="#skills">my skills</a></li>
+                                <li data-after="projects"><a href="#projects">projects</a></li>
+                                <li data-after="contact"><a href="#contact">contact</a></li>
+                            </ul>
+                        </div>
                     </nav>
                 </div>
             </div>
@@ -812,7 +959,7 @@
                                     </svg>
                                 </div>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eligendi magnam doloremque? Molestiae veritatis rem molestias. Magni, delectus necessitatibus molestias in modi nobis, ab perspiciatis aperiam vel inventore, dolor iste.
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis, a.
                                 </p>
                             </li>
                             <li>
@@ -823,7 +970,7 @@
                                     </svg>
                                 </div>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eligendi magnam doloremque? Molestiae veritatis rem molestias. Magni, delectus necessitatibus molestias in modi nobis, ab perspiciatis aperiam vel inventore, dolor iste.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, explicabo?
                                 </p>
                             </li>
                             <li>
@@ -834,7 +981,7 @@
                                     </svg>
                                 </div>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eligendi magnam doloremque? Molestiae veritatis rem molestias. Magni, delectus necessitatibus molestias in modi nobis, ab perspiciatis aperiam vel inventore, dolor iste.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, et!
                                 </p>
                             </li>
                             <li>
@@ -845,7 +992,7 @@
                                     </svg>
                                 </div>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eligendi magnam doloremque? Molestiae veritatis rem molestias. Magni, delectus necessitatibus molestias in modi nobis, ab perspiciatis aperiam vel inventore, dolor iste.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, quia.
                                 </p>
                             </li>
                             <li>
@@ -856,7 +1003,7 @@
                                     </svg>
                                 </div>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eligendi magnam doloremque? Molestiae veritatis rem molestias. Magni, delectus necessitatibus molestias in modi nobis, ab perspiciatis aperiam vel inventore, dolor iste.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, eius.
                                 </p>
                             </li>
                             <li>
@@ -867,7 +1014,7 @@
                                     </svg>
                                 </div>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eligendi magnam doloremque? Molestiae veritatis rem molestias. Magni, delectus necessitatibus molestias in modi nobis, ab perspiciatis aperiam vel inventore, dolor iste.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, praesentium.
                                 </p>
                             </li>
                         </ul>
@@ -880,6 +1027,167 @@
         <section class="sec projects" id="projects">
             <div class="container">
                 <h2>projects</h2>
+                <div class="in">
+                    <h3>
+                        <span data-aos="fade-right" data-aos-delay="300">my</span> 
+                        <span data-aos="fade-right" data-aos-delay="600">web</span>
+                        <span data-aos="fade-right" data-aos-delay="900">portfolio</span>
+                    </h3>
+                    <div class="all-projects">
+                        <ul>
+                            <li>
+                                <div class="projects-img" data-aos="fade-left" data-aos-delay="0">
+                                    <div class="img-box">
+                                        <img src="./images/img-megabox.jpg" alt="메가박스">
+                                    </div>
+                                </div>
+                                <div class="projects-content" data-aos="fade-right" data-aos-delay="0">
+                                    <div class="projects-tit">
+                                        <h4>megabox</h4>
+                                    </div>
+                                    <div class="projects-txt">
+                                        <p>
+                                            <span>#반응형#리뉴얼#제작기간7일#참여율30%</span>                                            
+                                            <br>
+                                            <span>기존의 고정형 웹페이지를 반응형으로 리뉴얼하였습니다. 고전적인 float, block, inline을 이용한 레이아웃을 최신 트렌드인 flex container를 이용하여 사이트 특성에 맞도록 제작하였습니다.</span>
+                                        </p>
+                                    </div>
+                                    <div class="projects-btn">
+                                        <div class="btn-source">
+                                            <a href="https://github.com/yeonghoonPark/megabox" target="_blank">소스보기</a>
+                                        </div>
+                                        <div class="btn-doc">
+                                            <a href="#" target="_blank">기획안보기</a>
+                                        </div>
+                                        <div class="btn-site">
+                                            <a href="https://yeonghoonpark.github.io/megabox/" target="_blank">바로가기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="projects-img" data-aos="fade-right" data-aos-delay="0">
+                                    <div class="img-box">
+                                        <img src="./images/img-paikdabang.jpg" alt="빽다방">
+                                    </div>
+                                </div>
+                                <div class="projects-content" data-aos="fade-left" data-aos-delay="0">
+                                    <div class="projects-tit">
+                                        <h4>paik's coffee</h4>
+                                    </div>
+                                    <div class="projects-txt">
+                                        <p>
+                                            <span>#반응형#리뉴얼#제작기간7일#참여율30%</span>                                            
+                                            <br>
+                                            <span>기존의 고정형 웹페이지를 반응형으로 리뉴얼하였습니다. 고전적인 float, block, inline을 이용한 레이아웃을 최신 트렌드인 flex container를 이용하여 사이트 특성에 맞도록 제작하였습니다.</span>
+                                        </p>
+                                    </div>
+                                    <div class="projects-btn">
+                                        <div class="btn-source">
+                                            <a href="https://github.com/yeonghoonPark/paikdabang" target="_blank">소스보기</a>
+                                        </div>
+                                        <div class="btn-doc">
+                                            <a href="#" target="_blank">기획안보기</a>
+                                        </div>
+                                        <div class="btn-site">
+                                            <a href="https://yeonghoonpark.github.io/paikdabang/" target="_blank">바로가기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="projects-img" data-aos="fade-left" data-aos-delay="0">
+                                    <div class="img-box">
+                                        <img src="./images/img-indigo.jpg" alt="인디고">
+                                    </div>
+                                </div>
+                                <div class="projects-content" data-aos="fade-right" data-aos-delay="0">
+                                    <div class="projects-tit">
+                                        <h4>indigo</h4>
+                                    </div>
+                                    <div class="projects-txt">
+                                        <p>
+                                            <span>#반응형#리뉴얼#제작기간7일#참여율30%</span>                                            
+                                            <br>
+                                            <span>기존의 고정형 웹페이지를 반응형으로 리뉴얼하였습니다. 고전적인 float, block, inline을 이용한 레이아웃을 최신 트렌드인 flex container를 이용하여 사이트 특성에 맞도록 제작하였습니다.</span>
+                                        </p>
+                                    </div>
+                                    <div class="projects-btn">
+                                        <div class="btn-source">
+                                            <a href="https://github.com/yeonghoonPark/indigo-mobile" target="_blank">소스보기</a>
+                                        </div>
+                                        <div class="btn-doc">
+                                            <a href="#" target="_blank">기획안보기</a>
+                                        </div>
+                                        <div class="btn-site">
+                                            <a href="https://yeonghoonpark.github.io/indigo-mobile/" target="_blank">바로가기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="projects-img" data-aos="fade-right" data-aos-delay="0">
+                                    <div class="img-box">
+                                        <img src="./images/img-hollys.jpg" alt="할리스커피">
+                                    </div>
+                                </div>
+                                <div class="projects-content" data-aos="fade-left" data-aos-delay="0">
+                                    <div class="projects-tit">
+                                        <h4>hollys coffee</h4>
+                                    </div>
+                                    <div class="projects-txt">
+                                        <p>
+                                            <span>#반응형#리뉴얼#제작기간7일#참여율30%</span>                                            
+                                            <br>
+                                            <span>기존의 고정형 웹페이지를 반응형으로 리뉴얼하였습니다. 고전적인 float, block, inline을 이용한 레이아웃을 최신 트렌드인 flex container를 이용하여 사이트 특성에 맞도록 제작하였습니다.</span>
+                                        </p>
+                                    </div>
+                                    <div class="projects-btn">
+                                        <div class="btn-source">
+                                            <a href="https://github.com/yeonghoonPark/hollys" target="_blank">소스보기</a>
+                                        </div>
+                                        <div class="btn-doc">
+                                            <a href="#" target="_blank">기획안보기</a>
+                                        </div>
+                                        <div class="btn-site">
+                                            <a href="https://yeonghoonpark.github.io/hollys/" target="_blank">바로가기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="projects-img" data-aos="fade-left" data-aos-delay="0">
+                                    <div class="img-box">
+                                        <img src="./images/img-travel.jpg" alt="트라벨">
+                                    </div>
+                                </div>
+                                <div class="projects-content" data-aos="fade-right" data-aos-delay="0">
+                                    <div class="projects-tit">
+                                        <h4>travel</h4>
+                                    </div>
+                                    <div class="projects-txt">
+                                        <p>
+                                            <span>#반응형#리뉴얼#제작기간7일#참여율30%</span>                                            
+                                            <br>
+                                            <span>기존의 고정형 웹페이지를 반응형으로 리뉴얼하였습니다. 고전적인 float, block, inline을 이용한 레이아웃을 최신 트렌드인 flex container를 이용하여 사이트 특성에 맞도록 제작하였습니다.</span>
+                                        </p>
+                                    </div>
+                                    <div class="projects-btn">
+                                        <div class="btn-source">
+                                            <a href="https://github.com/yeonghoonPark/travel" target="_blank">소스보기</a>
+                                        </div>
+                                        <div class="btn-doc">
+                                            <a href="#" target="_blank">기획안보기</a>
+                                        </div>
+                                        <div class="btn-site">
+                                            <a href="https://yeonghoonpark.github.io/travel/" target="_blank">바로가기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -910,9 +1218,10 @@
         let chk01 = document.getElementById('chk01');
         let btnPopup = document.getElementById('btn-popup');
         let tglNav = document.getElementById('tgl-nav');
-        let mainNavEl = document.getElementById('main-nav');
+        let mainNavEl = document.querySelector('.main-nav-container');
         let navEls = document.querySelectorAll('#main-nav a');
-        let headerEl = document. getElementById('home');
+        let headerEl = document.getElementById('home');
+        let wrapperEl = document.querySelector('.wrapper');
 
         // popup 닫기 이벤트
         btnPopup.addEventListener('click',()=>{
@@ -927,6 +1236,7 @@
         tglNav.addEventListener('click',()=>{
             showNav(mainNavEl);
             tglNav.classList.toggle('close');
+            wrapperEl.classList.toggle('lock');
         })
 
         // target 이동 이벤트
